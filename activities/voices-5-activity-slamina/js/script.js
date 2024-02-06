@@ -156,9 +156,10 @@ function preload() {
 
 function setup() {
     createCanvas(500, 500);
+
     //start the speechRec settings
     speechRecognizer.continuous = true;
-    speechRecognizer.onResult = handleSpeechInput();
+    speechRecognizer.onResult = handleSpeechInput;
     speechRecognizer.start();
 }
 
@@ -178,7 +179,7 @@ function draw() {
     textSize(32);
     textAlign(CENTER, CENTER);
     text(currentAnswer, width / 2, height / 2);
-    text(currentAnimal, width / 2, height / 3);
+    // text(currentAnimal, width / 2, height / 3);
 }
 
 function mousePressed() {
@@ -188,7 +189,7 @@ function mousePressed() {
 }
 
 function handleSpeechInput() {
-    let guessedAnimal = `WHAT?!`;
+    let guessedAnimal = `what?!`;
     if (speechRecognizer.resultValue) {
         let lowerCaseResult = speechRecognizer.resultString.toLowerCase();
         let parts = lowerCaseResult.split(`i think it is `);
@@ -197,7 +198,7 @@ function handleSpeechInput() {
         }
     }
     currentAnswer = guessedAnimal;
-    console.log('currentAnswer');
+    console.log('guessedAnimal');
 }
 
 function reverseString(string) {
