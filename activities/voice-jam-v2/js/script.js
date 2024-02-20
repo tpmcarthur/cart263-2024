@@ -8,82 +8,118 @@ Native American slang tool
 "use strict";
 // Array of slang words and definitions, usage and usage
 const slangWords = [
-    {
-        word: "howah",
-        usage: "a versatile word used in various contexts such as awe, encouragement, or surprise. for example, 'howah, you's guys should go down to betty's house, she's selling frybread for a dollar, I think that's really crazy.'"
-    },
-    {
-        word: "den",
-        usage: "similar to 'then', used mostly at the end of a sentence. 'well, if we can't get any nuggets, what do you guys have den?'"
-    },
-    {
-        word: "the rez",
-        usage: "this phrase refers to a native american reservation."
-    },
-    {
-        word: "rezzy",
-        usage: "used to describe something that is defective, or just plain broke. 'not only is jimmy's payment car a get, it's also rezzy.'"
-    },
-    {
-        word: "snagging",
-        usage: "The action of riding around in your rez bomb looking for a new old lady/man, because the other one left you."
-    },
+    // Works
+    // {
+    //     word: "howah",
+    //     usage: "Ho Wah",
+    //     recognizedAs: ["Ho-Wah", "howah", "hoh wah", "wah", "ho", "wah"],
+    //     def: "a versatile word used in various contexts such as awe, encouragement, or surprise. for example, 'ho-wah, you's guys should go down to betty's house, she's selling fry-bread for a dollar, I think that's really crazy.'"
+    // },
 
-    {
-        word: "bepsi",
-        usage: "'pepsi.'cuzzin, pass me a bepsi."
-    },
+    //Works
+    // {
+    //     word: "den",
+    //     usage: "den",
+    //     recognizedAs: ["den", "dɛn"],
+    //     def: "similar to 'then', used mostly at the end of a sentence. 'well, if we can't get any nuggets, what do you guys have den?'"
+    // },
 
-    {
-        word: "skoden",
-        usage: "'cuzzin 1: skoden, cha.' 'cuzzin 2: eee calm down, I was just joking.'"
-    },
+    //Works
+    // {
+    //     word: "the rez",
+    //     usage: "the rez",
+    //     recognizedAs: ["the rez", "the", "rez"],
+    //     def: "this phrase refers to a native american reservation."
+    // },
 
-    {
-        word: "supden",
-        usage: "short for 'whats up then'. 'supden, let's skoden."
-    },
+    // {
+    //     word: "rezzy",
+    //     usage: "rezzy", 
+    //     def: "used to describe something that is defective, or just plain broke. 'not only is jimmy's payment car a get, it's also rezzy.'"
+    // },
 
-    {
-        word: "stoodis!",
-        usage: "let's do this."
-    },
+    //Works
+    // {
+    //     word: "snagging",
+    //     usage: "snagging",
+    //     def: "The action of riding around in your rez bomb looking for a new old lady/man, because the other one left you."
+    // },
 
-    {
-        word: "uncle",
-        usage: 'may or may not be an immediate family member.'
-    },
+    // Works
+    // {
+    //     word: "bepsi",
+    //     usage: "bêbsi",
+    //     recognizedAs: ["bêbsi", "pepsi"],
+    //     def: "'a variation of pepsi. 'cuzzin, pass me a bepsi?"
+    // },
 
-    {
-        word: "zif",
-        usage: "as if. 'nevermind den, i'll try harder next time.' 'zif.'"
-    },
+    //Works
+    // {
+    //     word: "skoden",
+    //     usage: "skoadɛn",
+    //     recognizedAs: ["skoadɛn", "sk-oh-den", "sko", "den"],
+    //     def: "'cuzzin 1: skoden!' 'cuzzin 2: eee calm down, I was just joking!'"
+    // },
 
-    {
-        word: "deadly",
-        usage: "excellent"
-    },
+    //Works, AGRESSIVLEY 
+    // {
+    //     word: "supden",
+    //     usage: "suh-pdɛn",
+    //     recognizedAs: ["suhp dɛn", "sup", "dɛn", "den", "supden"],
+    //     def: "short for 'whats up then'. 'supden, let's skoden."
+    // },
 
-    {
-        word: "errrr",
-        usage: "gross"
-    },
+    // {
+    //     word: "stoodis",
+    //     usage: "stoodis",
+    //     def: "short for 'let's do this.' 'stoodis, mom is waiting!'"
+    // },
 
-    {
-        word: "eversick",
-        usage: "attitude or expression. 'eversick, don't say that.'"
-    },
+    //Works
+    // {
+    //     word: "uncle",
+    //     usage: "uncle",
+    //     def: "may or may not be an immediate family member."
+    // },
+
+    // {
+    //     word: "zif",
+    //     usage: "zif",
+    //     def: "as if. 'nevermind den, i'll try harder next time.' 'zif!'"
+    // },
+
+    //Works
+    // {
+    //     word: "deadly",
+    //     usage: "deadly",
+    //     def: "used as an expression of 'excellent'. ever deadly cousin! where did you find bepsi?"
+    // },
+
+    // {
+    //     word: "errrr",
+    //     usage: "errr"
+    //     def: "plains cree, to reveal someone's disgust. mostly used in response to a question or idea. Your ex is on the phone, do you wanna talk to them? 'err' no!"
+    // },
+
+    // {
+    //     word: "ever-sick",
+    //     usage: "ever-sick",
+    //     def: "attitude or expression. 'eversick, don't say that.'"
+    // },
 ];
 
+
+//Global Variables
 let currentWordIndex = -1;
+let displayDef = false; //control to see the display of the definiton 
+
 const speechSynthesizer = new p5.Speech();
 const speechRecognizer = new p5.SpeechRec('en-US', handleSpeechInput);
-speechRecognizer.continuous = false; // to stop after each recognition
+speechRecognizer.continuous = false; // to stop after each recognition ** is this why it keeps not working??
 
 function preload() {
 
 }
-
 
 //Setup
 function setup() {
@@ -92,16 +128,17 @@ function setup() {
     textSize(24);
     textAlign(CENTER, CENTER);
     fill(255);
-
-    speechSynthesizer.setRate(0.9); // slow down speech a bit
+    speechSynthesizer.setRate(0.8); // slow down speech a bit
 }
-
 
 //Draw()
 function draw() {
     background(0);
+    if (displayDef) {
+        text(slangWords[currentWordIndex].def, width / 2, height / 2);
+    }
 
-    if (currentWordIndex >= 0) {
+    else if (currentWordIndex >= 0) {
         text(slangWords[currentWordIndex].word, width / 2, height / 2);
     }
 
@@ -110,28 +147,86 @@ function draw() {
     }
 }
 
-function mousePressed() {
-    if (currentWordIndex < 0 || !speechRecognizer.listening) {
-        currentWordIndex = floor(random(slangWords.length)); // Get a random index
-        let word = slangWords[currentWordIndex].word;
-        speechSynthesizer.speak(`repeat after me: ${word}`);
-        speechRecognizer.start(); // Start listening for the user to repeat the word
-    }
+function displayDefinition(def) {
+    displayDef = true;
 }
 
+//test function
 function handleSpeechInput() {
     if (speechRecognizer.resultValue) {
-        let userSaid = speechRecognizer.resultString.toLowerCase(); // Convert recognized speech to lowercase
-        // Assuming you want to check if the spoken word matches the current slang word directly
-        let currentWord = slangWords[currentWordIndex].word.toLowerCase(); // Also convert the expected word to lowercase for comparison
+        let userSaid = speechRecognizer.resultString.toLowerCase();
+        let isCorrect = false;
 
-        if (userSaid.includes(currentWord)) {
-            // If the user correctly repeats the word, speak out its usage
-            speechSynthesizer.speak(slangWords[currentWordIndex].usage);
-        } else {
-            // If the user's response doesn't match, prompt them to try again
-            speechSynthesizer.speak("try again, or click for a new word.");
+        // Check if 'recognizedAs' field exists and is an array
+        if (slangWords[currentWordIndex].recognizedAs && Array.isArray(slangWords[currentWordIndex].recognizedAs)) {
+            // Iterate over 'recognizedAs' to find a match
+            isCorrect = slangWords[currentWordIndex].recognizedAs.some(possibleWord =>
+                userSaid.includes(possibleWord.toLowerCase())
+            );
         }
-        currentWordIndex = -1; // Reset the index to allow for a new word to be selected on the next click
+
+        else {
+            // Fallback to using 'usage' if 'recognizedAs' is not available
+            let expectedUsage = slangWords[currentWordIndex].usage.toLowerCase();
+            isCorrect = userSaid.includes(expectedUsage);
+        }
+
+        if (isCorrect) {
+            let def = slangWords[currentWordIndex].def;
+            speechSynthesizer.speak(def);
+            displayDef = true; // Set to true to signal the display of the definition
+        }
+
+        else {
+            speechSynthesizer.speak("try again.");
+        }
+    }
+
+}
+
+// function handleSpeechInput() {
+//     if (speechRecognizer.resultValue) {
+//         let userSaid = speechRecognizer.resultString.toLowerCase(); // convert recognized speech to lower case 
+//         // let expectedUsage = slangWords[currentWordIndex].usage.toLowerCase(); // working one 
+
+//         let expectedUsage = slangWords[currentWordIndex].usage.map(usage => usage.toLowerCase());
+
+//         const isMatch = expectedUsages.some(expectedUsage => userSaid.includes(expectedUsage));
+
+
+//         //
+//         if (userSaid.includes(expectedUsage)) {
+//             let def = slangWords[currentWordIndex].def;
+//             speechSynthesizer.speak(def);
+//             displayDefinition(def);
+//         }
+
+//         else {
+//             speechSynthesizer.speak("try again.");
+//         }
+
+//         // if (userSaid.includes(slangWords[currentWordIndex].usage.toLowerCase()) && userSaid.includes(slangWords[currentWordIndex].def.toLowerCase())) {
+//         //     speechSynthesizer.speak(`slangWords[currentWordIndex].${def}`);
+//         // }
+//     }
+
+// }
+
+function mousePressed() {
+    displayDef = false;
+
+    if (currentWordIndex < 0 || !speechRecognizer.listening) {
+        currentWordIndex = floor(random(slangWords.length)); // Get a random index
+        let usage = slangWords[currentWordIndex].usage;
+        // let def = slangWords[currentWordIndex].def; // working one
+        speechSynthesizer.speak(`repeat after me: ${usage}`); // string from array 'word'
+
+        setTimeout(() => {
+            speechRecognizer.start();
+        }, 3000);
+        // speechSynthesizer.speak(def); //says definition
     }
 }
+
+
+
