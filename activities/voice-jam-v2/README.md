@@ -10,7 +10,7 @@ Voice Recognition and Synthesis: The application reads out a slang word, and the
 
 Dynamic content: A curated list of slang words, each with a unique meaning or usage or scenario providing a rich learning experience.
 
-## Things I wanted to add and or fix/change 
+## Things I wanted to add and or fix/change in the future
 Easter egg? Once the user has clicked through and repeated all the words correctly and listened to the definitions I wanted to add a humoruous "state" thanking the user for interacting.
 
 I want to create a drawn shape pixel style of 'Unknown Warrior/William Knifeman' from Rez Dogs as the form of the fortune teller.

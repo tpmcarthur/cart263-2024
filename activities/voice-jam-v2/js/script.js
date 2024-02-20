@@ -49,6 +49,7 @@ const slangWords = [
     {
         word: "snagging",
         usage: "snagging",
+        recognizedAs: ["snagging"],
         def: "The action of riding around in your rez bomb looking for a new old lady/man, because the other one left you."
     },
 
@@ -70,8 +71,8 @@ const slangWords = [
 
     //Works, AGRESSIVLEY 
     {
-        word: "supden",
-        usage: "suh-pdɛn",
+        word: "sup den",
+        usage: "suhp-dɛn",
         recognizedAs: ["suhp dɛn", "sup", "dɛn", "den", "supden"],
         def: "short for 'whats up then'. 'supden, let's skoden."
     },
@@ -88,6 +89,7 @@ const slangWords = [
     {
         word: "uncle",
         usage: "uncle",
+        recognizedAs: ["uncle"],
         def: "may or may not be an immediate family member."
     },
 
@@ -102,6 +104,7 @@ const slangWords = [
     {
         word: "deadly",
         usage: "deadly",
+        recognizedAs: ["deadly"],
         def: "used as an expression of 'excellent'. ever deadly cousin! where did you find bepsi?"
     },
 
@@ -125,6 +128,7 @@ const slangWords = [
 //Global Variables
 let currentWordIndex = -1; // current word being displayed
 let displayDef = false; //control to see the display of the definiton 
+let padding = 50;
 
 const speechSynthesizer = new p5.Speech(); //initalize speech syth
 const speechRecognizer = new p5.SpeechRec('en-US', handleSpeechInput); // initalize speech recognizer
@@ -149,7 +153,7 @@ function draw() {
 
     // If displayDef is true, display the definition text
     if (displayDef) {
-        text(slangWords[currentWordIndex].def, width / 2, height / 2); // center text
+        text(slangWords[currentWordIndex].def, padding, height / 2, width - 2 * padding); // center text
     }
 
     // If currentWordIndex is valid, display the word text
