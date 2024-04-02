@@ -3,9 +3,11 @@ A mini experience/prototype/interactive experience designed to visually recreate
 
 Focus on the interactive play between human movement and the aurora simulation. 
 
-The use of colours in an array suggests at the gradient like colour often seen in the northern lights, as more people join in and move the colours shift and move together.
+The use of colours in an array suggests at the gradient like colour often seen in the northern lights, as more people join in and move the colours shift and move together. ( colour is janky atm due to confidence level being low, currently set low to show more lines)
 
 Ended up using poseNet, it should be able to detect multiple poses/people in the function gotPoses(results)
+
+Want to flip the camera, it is mirrored in the opposite direction 
 
 # Background 
 I've been choosing to focus in incorporating a mix of the visual media art in combination with the creative coding. Each project I am trying to combine and explore new ideas that could lead to bigger projects further on down the road. 
@@ -20,6 +22,8 @@ I hope what I share and create is insightful!
 
 # Resources
 https://www.youtube.com/watch?v=OIo-DIOkNVg&t=2s 
+
+https://learn.ml5js.org/#/reference/posenet?id=maxposedetections 
 
 # code taken out, could be used/changed later
 //Main working option around silhoutte
